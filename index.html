@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Drive Image URL Generator</title>
+    <style>
+      /* Add some basic styling here if desired */
+    </style>
+    <script>
+      function generateImageUrl() {
+        const inputUrl = document.getElementById('driveUrl').value;
+        const fileId = inputUrl.split('id=')[1].split('&')[0];
+        const imageUrl = 'https://drive.google.com/uc?export=view&id=' + fileId;
+        document.getElementById('imageUrl').value = imageUrl;
+      }
+
+      function clearForm() {
+        document.getElementById('driveUrl').value = '';
+        document.getElementById('imageUrl').value = '';
+      }
+
+      function copyToClipboard() {
+        const copyText = document.getElementById("imageUrl");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999) /* For mobile devices */
+        document.execCommand("copy");
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Google Drive Image URL Generator</h1>
+    <p>Enter your Google Drive image URL:</p>
+    <input type="text" id="driveUrl">
+    <button onclick="generateImageUrl()">Generate</button>
+    <button onclick="clearForm()">Clear</button>
+    <p>Here's your image URL:</p>
+    <input type="text" id="imageUrl" readonly>
+    <button onclick="copyToClipboard()">Copy URL</button>
+  </body>
+</html>
